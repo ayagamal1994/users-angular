@@ -1,0 +1,34 @@
+<section class="users">
+    <div class="container">
+        <h1>users</h1>
+        <div class="users_search">
+            <input [(ngModel)] = "searchValue" type="text" placeholder="search by email">
+            <button (click) = "searchByEmail()">search</button>
+        </div>
+        <div class="users_cards">
+            @for (user of users; track user.email){
+                @if(!searchButtonClicked || user.email.toLowerCase().includes(searchValue)){
+                    <div class="card">
+                        <div class="card_img">
+                            <img [src]="user.profilePicture" alt="profile"/>
+                        </div>
+                        <h3 class="role" [ngStyle]="{
+                        'background-color': user.role === 'admin'? '#f9b3b3':
+                        user.role === 'user'? '#bdf8c4':
+                        user.role === 'moderate'? '#fbf9ad': '#000'
+                        }">
+                        {{user.role}}
+                        </h3>
+                        <ul>
+                            <li class="username">{{user.username}}</li>
+                            <li class="email">{{user.email}}</li>
+                            <li class="phone">{{user.phone}}</li>
+                            <li class="birthdate">{{user.birthdate}}</li>
+                        </ul>
+                    </div>
+                }
+                
+            }
+        </div>
+    </div>
+</section>
